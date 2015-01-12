@@ -1,0 +1,23 @@
+//- index.jade
+extends ../layout
+block content
+  div(class="col-lg-8 questions")
+    div(class="well")
+      form(class="form-horizontal" action='login' method="post")
+        fieldset
+          legend
+            div(class="form-group")
+              label(for="email" class="col-lg-2 control-label") email
+              div(class="col-lg-10")
+                  input(type="email" class="form-control" placeholder="example@email.com") 
+            div(class="form-group")
+              label(for="password" class="col-lg-2 control-label") password
+              div(class="col-lg-10")
+                  input(type="password" class="form-control" name="password" placeholder="loremipsum")
+            div(class="form-group")      
+              div(class="col-lg-10 col-lg-offset-2")
+                button(class="btn btn-default" type="reset") Cancel
+                button(class="btn btn-primary" type="submit") Submit  
+
+ 
+

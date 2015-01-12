@@ -1,0 +1,34 @@
+html
+  head
+    title!= title
+    link(href='/static/bootstrap/dist/css/bootstrap.min.css' rel="stylesheet")
+    link(href='/static/bootstrap-material-design/dist/css/material.min.css' rel="stylesheet")
+    
+    link(href='/public/css/main.css' rel="stylesheet")
+    
+    script(src='/static/jquery/dist/jquery.js')
+    script(src='/static/bootstrap/js/modal.js')
+    script(src='/static/bootstrap-material-design/dist/js/material.js')
+  
+    script(src='/static/angular/angular.min.js')
+    script(src="/static/bootstrap-material-design/dist/js/ripples.js")
+    script(src='/public/js/main.js')
+  
+  body(ng-app="myApp")
+    div(class="rows jumbotron")
+      h2!= "Hi "
+      div(class="clear")
+    div(class="container")
+      div(class="rows")
+
+      div(class="rows main")
+        block content
+        include ./partials/sidebar.jade
+
+        
+        
+     
+
+ 
+
+      

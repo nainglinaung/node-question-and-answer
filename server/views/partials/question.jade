@@ -1,0 +1,19 @@
+//- index.jade
+extends ../layout
+block content
+  div(class="col-lg-8 questions" ng-controller="QuestionCtrl")
+        h3!= "Question List"
+        div(class="panel panel-default" ng-repeat="question in questions")
+          div(class="panel-body")
+            div(class="vote col-lg-1 accent-color") {{question.vote}}
+            div(class="answer col-lg-1 accent-color") {{question.answer_count}}
+            div(class="view col-lg-1 accent-color") {{question.views}}
+            div(class="col-lg-9")
+              h4(class="heading") 
+                a(href='/question/{{question._id}}') {{question.title}}
+              span(class="user right") &nbsp;asked by &nbsp;
+                a(href="#") {{question.user}}
+              span(class="time right")
+                a(href="#") {{question.date+" "}}
+            
+          

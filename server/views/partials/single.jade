@@ -1,0 +1,36 @@
+//- index.jade
+mixin vote(param,type)
+  div
+    a(href!=type+"/up/"+param._id)!= "up"
+  div(class="vote accent-color")!= param.vote
+  div
+    a(href=type+"/down/"+param._id)!= "down"
+
+mixin info(param,type)
+  div(class="info")
+    div(class="user right")!=type
+      a(href="#")!= param.user
+    div(class="time right")
+      a(href="#")!= param.date
+     div(class="clear")      
+      
+
+extends ../layout
+block content
+  div(class="col-lg-8")
+    div(class="well")
+        h3(class="single")!=doc.title
+        div(class="row")
+          div(class="col-lg-1")
+            +vote(doc,"question")
+          div(class="col-lg-offset-1")
+            div(class="content")
+              p!=doc.body
+        div(class="row")
+          +info(doc,"&nbsp; asked by &nbsp;")
+
+      
+      
+
+    include answer.jade
+
