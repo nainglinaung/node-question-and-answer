@@ -1,5 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var Logger = require('winston');
+var Question = require('../models/question');
 
 module.exports = (function() {
 
@@ -9,7 +11,13 @@ module.exports = (function() {
 
 	router.get('/',function(req,res){
 		console.log(req.user);
-		res.render('partials/question', { title: 'Hey', message: 'Hello there!', user: req.user});
+
+		Question.find({},{body:false},function (err, doc) {
+  			if (err) return Logger.error(err);
+  			res.render('partials/question',{title:'Hey', user:req.user, questions:doc});
+  			
+		});
+	
 	});
 
 	return router; 
