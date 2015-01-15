@@ -6,6 +6,8 @@ block content
       form(class="form-horizontal" action='register' method="post")
         fieldset
           legend
+            if (message.length > 0)
+              div(class="alert alert-danger")!= message  
             div(class="form-group")
               label(for="name" class="col-lg-2 control-label") name
               div(class="col-lg-10")
@@ -17,7 +19,7 @@ block content
             div(class="form-group")
               label(for="email" class="col-lg-2 control-label") email
               div(class="col-lg-10")
-                  input(type="email" class="form-control" placeholder="example@email.com") 
+                  input(type="email" class="form-control" name="email" placeholder="example@email.com") 
             div(class="form-group")      
               div(class="col-lg-10 col-lg-offset-2")
                 button(class="btn btn-default" type="reset") Cancel

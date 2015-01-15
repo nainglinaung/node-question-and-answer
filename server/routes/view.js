@@ -8,7 +8,8 @@ module.exports = (function() {
 	var router = express.Router();
 
 	router.get('/',function(req,res){
-		res.render('partials/question', { title: 'Hey', message: 'Hello there!'});
+		console.log(req.user);
+		res.render('partials/question', { title: 'Hey', message: 'Hello there!', user: req.user});
 	});
 
 	return router; 

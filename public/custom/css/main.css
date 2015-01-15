@@ -9,6 +9,11 @@
 .divider-color         { border-color: #B6B6B6; }
 
 
+.counts {
+	margin-left: -15px;
+	margin-right: -50px;
+}
+
 .info {
 	margin-right: 10px;
 }

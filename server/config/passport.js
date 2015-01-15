@@ -8,6 +8,8 @@ module.exports =function(passport) {
 		done(null,user.id);
 	});
 
+	
+
 	passport.deserializeUser(function(id,done){
 		User.findById(id,function(err,user){
 			done(err,user);
@@ -19,6 +21,8 @@ module.exports =function(passport) {
 		passwordField:'password',
 		passReqToCallback:true
 	}, function(req,email,password,done){
+
+		console.log('hi');
 			
 		User.findOne({'local.email':email},function(err,user){
 			if (err) return done(err);
@@ -36,7 +40,8 @@ module.exports =function(passport) {
 		passwordField:'password',
 		passReqToCallback:true
 	}, function(req,email,password,done){
-		process.nextTick(function(){
+
+		process.nextTick(function(){			
 			
 			User.findOne({'local.email':email},function(err,user){
 				if (err) return done(err);
@@ -54,10 +59,5 @@ module.exports =function(passport) {
 			});
 		});	
 
-	}
-
-
-
-
-	));
+	}));
 }

@@ -21,6 +21,11 @@ html
     div(class="container")
       div(class="rows")
 
+      unless user
+        "login"
+      else
+        div!= user.local.email 
+
       div(class="rows main")
         block content
         include ./partials/sidebar.jade

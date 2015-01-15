@@ -7,9 +7,12 @@ block content
         fieldset
           legend
             div(class="form-group")
+              if (message.length > 0)
+                div(class="alert alert-danger")!= message  
+         
               label(for="email" class="col-lg-2 control-label") email
               div(class="col-lg-10")
-                  input(type="email" class="form-control" placeholder="example@email.com") 
+                  input(type="email" name="email" class="form-control" placeholder="example@email.com") 
             div(class="form-group")
               label(for="password" class="col-lg-2 control-label") password
               div(class="col-lg-10")

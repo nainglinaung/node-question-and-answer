@@ -30,8 +30,7 @@ module.exports = (function() {
 		QuestionCtrl.upOrDown(request,function(doc,err){
 			if (err) Logger.error(err);
 			res.redirect('/question/'+request.id);
-		
-			
+					
 		});
 		
 	});
