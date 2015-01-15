@@ -19,7 +19,7 @@ module.exports = (function() {
 	router.post('/create',function(req,res){
 		QuestionCtrl.create(req.body,function(data,err){
 			if (err) Logger.error(err);
-			res.redirect('/');
+			if (data === 'redirect') res.redirect('/');
 		});
 	});
 

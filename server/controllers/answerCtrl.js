@@ -28,13 +28,14 @@ module.exports = {
 
 		Answer.findOne({_id:req.id},function(err,doc){
 			if(err) callback(null,err);
+			var question_id = doc.question_id;
 
 			(req.status) ? doc.vote++ : doc.vote--;
-			
 			doc.save(function(err){
 				if (err) callback(null,err);
-				callback('redirect',null);
+				callback(question_id,null);
 			});
+			
 		});
 	},
 }	

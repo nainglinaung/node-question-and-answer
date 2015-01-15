@@ -9,7 +9,7 @@ var schema = new Schema({
 	body: String,
 	answer_count: {type:Number, default:0},
 	date: { type: Date, default: Date.now },
-	views: {type: Number, default: 0},
+	view: {type: Number, default: 0},
 	vote: {type:Number, default:0}
 });
 

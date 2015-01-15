@@ -10,9 +10,6 @@ var users = [
 ];
 
 
-
-
-
 module.exports = (function() {
 
 
@@ -29,16 +26,23 @@ module.exports = (function() {
 
 
 
-	var passport_auth =	passport.authenticate('local',{ 
-		successRedirect: '/',
-    	failureRedirect: '/login' 
-	});
-
-
-	router.post('/register',passport_auth);
- 
 	var router = express.Router();
-	
+
+	router.post('/login',passport.authenticate('local-login',{
+		successRedirect:'/',
+		failureRedirect:'/login',
+		failureFlash:true
+
+	}));
+
+	router.post('/register',passport.authenticate('local-signup',{
+		successRedirect:'/',
+		failureRedirect:'/register',
+		failureFlash:true
+	}))	
+
+	//router.post('/register',passport_auth);
+ 	
 	router.get('/register',function(req,res){
 		res.render('partials/register',{title:'register'});
 	});

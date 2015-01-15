@@ -1,10 +1,10 @@
 //- index.jade
 mixin vote(param,type)
   div
-    a(href!=type+"/up/"+param._id)!= "up"
+    a(href!="/"+type+"/up/"+param._id)!= "up"
   div(class="vote accent-color")!= param.vote
   div
-    a(href=type+"/down/"+param._id)!= "down"
+    a(href="/"+type+"/down/"+param._id)!= "down"
 
 mixin info(param,type)
   div(class="info")
