@@ -22,7 +22,7 @@ html
       div(class="rows")
 
       unless user
-        "login"
+        div!= "login"
       else
         div!= user.local.email 
 
