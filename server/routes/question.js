@@ -1,5 +1,5 @@
 var express = require('express');
-var Logger = require('winston');
+
 
 var QuestionCtrl = require('../controllers/questionCtrl');
 
@@ -11,52 +11,17 @@ module.exports = (function() {
 
 	var router = express.Router();
 
-
-	router.get('/create',function(req,res){
-		res.render('partials/create',{title:'create'});
-	});
-
-	router.post('/create',function(req,res){
-		QuestionCtrl.create(req.body,function(data,err){
-			if (err) Logger.error(err);
-			if (data === 'redirect') res.redirect('/');
-		});
-	});
-
-	router.get('/up/:id',function(req,res){
-
-		var request = {status:true,id:req.params.id};
-
-		QuestionCtrl.upOrDown(request,function(doc,err){
-			if (err) Logger.error(err);
-			res.redirect('/question/'+request.id);
-					
-		});
-		
-	});
-
-
-	router.get('/down/:id',function(req,res){
-
+	var ensureAuthenticated = QuestionCtrl.ensureAuthenticated;
 	
-		var request = {status:false,id:req.params.id};
+	router.get('/create',ensureAuthenticated,QuestionCtrl.getCreate);
 
-		QuestionCtrl.upOrDown(request,function(doc,err){
-			if (err) Logger.error(err);
-			res.redirect('/question/'+request.id);
-		
-			
-		});
-	});
+	router.post('/create',ensureAuthenticated,QuestionCtrl.postCreate);
+	
+	router.get('/up/:id',ensureAuthenticated,QuestionCtrl.getUpOrDown);
 
+	router.get('/down/:id',ensureAuthenticated,QuestionCtrl.getUpOrDown);
 
-
-	router.get('/:id',function(req,res){
-		QuestionCtrl.showOne(req.params.id,function(doc,err){
-			if(err) Logger.error(err);
-			res.render('partials/single', { title: 'ads', doc:doc});
-		});
-	});
+	router.get('/:id',QuestionCtrl.getOne);
 
 
 	return router; 

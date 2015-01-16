@@ -1,41 +1,47 @@
 
 var Answer  = require('../models/answer');
 var faker = require('faker');
+var Logger = require('winston');
+var AnswerCtrl = require('./adminCtrl');
 
 
-module.exports = {
 
-	create:function(req,callback){
+AnswerCtrl.postCreate = function(req,res){
 
-		var ans = new Answer({
-		  user: faker.name.findName(),
-		  body: req.body,
-		  question_id: req.id,
+	var ans = new Answer({
+	  user: faker.name.findName(),
+	  body: req.body.body,
+	  question_id: req.params.id,
+	});
+
+	ans.save(function (err) {
+		
+		if (err) Logger.error(err);
+		
+		Answer.findById(ans, function (err, doc) {
+			if (err) Logger.error(err);
+			res.redirect('/question/'+doc.question_id);
 		});
+	});
+};
 
-		ans.save(function (err) {
-			
-			if (err) callback(null,err);
-			
-			Answer.findById(ans, function (err, doc) {
-				if (err) callback(null,err);
-				callback(req.id,null);
-			});
+AnswerCtrl.getUpOrDown = function(req,res){
+
+	Answer.findOne({_id:req.params.id},function(err,doc){
+		if(err) Logger.error(err);
+		var question_id = doc.question_id;
+		
+		var path = req.url.split('/')[1];
+		
+		(path === 'up') ? doc.vote++: doc.vote--;
+
+		doc.save(function(err){
+			if (err) Logger.error(err);
+			res.redirect('/question/'+question_id);
+
 		});
-	},
+		
+	});
+}
 
-	upOrDown:function(req,callback){
-
-		Answer.findOne({_id:req.id},function(err,doc){
-			if(err) callback(null,err);
-			var question_id = doc.question_id;
-
-			(req.status) ? doc.vote++ : doc.vote--;
-			doc.save(function(err){
-				if (err) callback(null,err);
-				callback(question_id,null);
-			});
-			
-		});
-	},
-}	
+module.exports = AnswerCtrl;

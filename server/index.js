@@ -7,7 +7,7 @@ app.set('view engine','jade');
 app.set('views', __dirname + '/views');
 
 
-require('./config')(app,express);
+var db = require('./config')(app,express);
 
 
 

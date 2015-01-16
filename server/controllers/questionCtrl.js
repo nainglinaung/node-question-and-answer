@@ -2,69 +2,64 @@ var Question = require('../models/question');
 var Answer  = require('../models/answer');
 var faker = require('faker');
 var util = require('util');
+var Logger = require('winston');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
-
-var Cat = mongoose.model('Cat', { name: String });
-
-var kitty = new Cat({ name: 'Zildjian' });
-kitty.save(function (err) {
-  if (err) // ...
-  console.log('meow');
-});
+var QuestionCtrl = require('./adminCtrl');
 
 
-module.exports = {
 
 
-	create:function(body,callback){
-		
-		var q = new Question({
-		  title: body.title,
-		  user: faker.name.findName(),
-		  body: body.body
-		});
-
-		q.save(function(err) {
-
-			console.log(err);
-			Question.findById(q, function (err, doc) {
-				if (err) callback(null,err);
-				callback('redirect',null);
+QuestionCtrl.getOne = function(req,res){
+	Question.findOne({_id:req.params.id},function (err, doc) {
+	(err) ? Logger.error(err) : doc.view++;			
+	
+	doc.save(function(err){
+		if(err) Logger.error(err);			
+			Answer.find({question_id:req.params.id},function(err,answers){
+				doc.answers = answers;
+				res.render('partials/single', { title: 'ads', doc:doc});
 			});
 		});
-	},
-
-	upOrDown:function(req,callback){
-
-		Question.findOne({_id:req.id},function(err,doc){
-			if(err) callback(null,err);
-
-			(req.status) ? doc.vote++ : doc.vote--;
-			
-			doc.save(function(err){
-				if (err) callback(null,err);
-				callback('redirect',null);
-			});
-		});
-	},
-
-	showOne:function(id,callback){
-		Question.findOne({_id:id},function (err, doc) {
-			
-			if(err) callback(null,err);
-			doc.view++;	
-
-			
-			doc.save(function(err){
-				if (err) callback(null,err);
-				
-				Answer.find({question_id:id},function(err,answers){
-					doc.answers = answers;
-					callback(doc,null);
-				});
-			});
-		});
-	}
+	});
 };
+
+QuestionCtrl.getCreate = function(req,res){
+	res.render('partials/create',{title:'create'});
+};
+
+QuestionCtrl.postCreate = function(req,res){
+	var body = req.body; 
+	var q = new Question({
+	  title: body.title,
+	  user: faker.name.findName(),
+	  body: body.body
+	});
+
+	q.save(function(err) {
+
+		if (err) Logger.error(err);
+		Question.findById(q, function (err, doc) {
+			if (err) Logger.error(err);
+			res.redirect('/');			
+		});
+	});
+};
+
+QuestionCtrl.getUpOrDown = function(req,res){
+	Question.findOne({_id:req.params.id},function(err,doc){
+		if (err) Logger.error(err);
+		var path = req.url.split('/')[1];			
+		(path === 'up') ? doc.vote++ : doc.vote--;
+
+		doc.save(function(err){
+			if (err) Logger.error(err);
+			res.redirect('/question/'+req.params.id);
+		});
+	});
+};
+
+
+module.exports = QuestionCtrl;
+

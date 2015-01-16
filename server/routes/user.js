@@ -1,13 +1,6 @@
 var Logger = require('winston');
 var express = require('express');
-var userCtrl = require('../controllers/userCtrl');
-var passport = require('passport');
-
-
-var users = [
-    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
-];
+var UserCtrl = require('../controllers/userCtrl');
 
 
 module.exports = (function() {
@@ -15,50 +8,23 @@ module.exports = (function() {
 
 	'use strict';
 
+	var ensureAuthenticated = UserCtrl.ensureAuthenticated;
+	var isLogin             = UserCtrl.isLogin;
 
-	function ensureAuthenticated(req, res, next) {
-		return (req.isAuthenticated()) ? next() : res.redirect('/user/login');
-	}
-
-	function isLogin(req,res,next) {
-		return (!req.isAuthenticated()) ? next() : res.redirect('/');	
-	}
 
 	var router = express.Router();
 
-	router.post('/login',passport.authenticate('local-login',{
-		successRedirect:'/',
-		failureRedirect:'/user/login',
-		failureFlash:true
+	router.post('/login',UserCtrl.postLogin);
 
-	}));
+	router.get('/profile',ensureAuthenticated,UserCtrl.getProfile);
 
-	router.get('/profile',ensureAuthenticated,function(req,res){
-		res.json({user:req.user});
-	});
-
-	router.post('/register',passport.authenticate('local-signup',{
-		successRedirect:'/',
-		failureRedirect:'/user/register',
-		failureFlash:true
-	}))	
+	router.post('/register',UserCtrl.postRegister);	
  	
-	router.get('/register',isLogin,function(req,res){
-		res.render('partials/register',{title:'register',message:req.flash('signupMessage')});
-	});
+	router.get('/register',isLogin,UserCtrl.getRegister);
 
-	router.get('/login',function(req,res){
-		res.render('partials/login',{title:'login',message: req.flash('loginMessage')});
-	});
+	router.get('/login',isLogin,UserCtrl.getLogin);
 
-	router.post('/login',isLogin,function(req,res){
-		res.json({post:'login'});
-	});
-
-	router.get('/', function(req, res){
-  		res.json({post:'success'});
-	});
-
+	
 
 	return router; 
 
