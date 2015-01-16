@@ -8,16 +8,11 @@ app.set('views', __dirname + '/views');
 
 
 var db = require('./config')(app,express);
-
-
-
 var base_url = path.normalize(__dirname+'/..');
 
 
 app.use('/static', express.static(base_url+'/public/components'));
 app.use('/public', express.static(base_url+'/public/custom'));
-
-
 
 
 // seed 
@@ -27,12 +22,8 @@ seeds.set();
 */
 // route 
 
-
-
-
 var routes = require('./routes')(app);
-
-
 var port = process.env.PORT || 8080;
+
 app.listen(port);
 console.log('magic happened at'+port);

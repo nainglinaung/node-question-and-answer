@@ -28,8 +28,11 @@ block content
               p!=doc.body
         div(class="row")
           +info(doc,"&nbsp; asked by &nbsp;")
-
-      
+        div(class="row")
+          span
+            a(href='/question/share/'+doc._id)!= "share"
+          span
+            a(href="/question/edit/"+doc._id)!= "edit"      
       
 
     include answer.jade

@@ -9,6 +9,12 @@ each answer in doc.answers
           +vote(answer,"answer")
         div(class="body col-lg-11")
           p!=answer.body
+        div(class="row")
+          span
+            a(href='/answer/share/'+answer._id)!= "share"
+          span
+            a(href="/answer/edit/"+answer._id)!= "edit"      
+      
 
     +info(answer,"&nbsp; answered by &nbsp;")
     

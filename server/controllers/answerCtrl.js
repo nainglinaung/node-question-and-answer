@@ -23,5 +23,26 @@ AnswerCtrl.postCreate = function(req,res){
 	});
 };
 
+AnswerCtrl.getEdit = function(req,res){
+	Answer.findOne({_id:req.params.id},function(err,answer){
+		if (err) Logger.error(err);
+		console.log(err);
+		console.log(answer);
+		res.render('partials/editAnswer',{title:'ads',answer:answer});	
+	});
+};
+
+AnswerCtrl.postEdit = function(req,res){
+
+	Answer.findOne({_id:req.params.id},function(err,answer){
+		if (err) Logger.error(err);
+
+		answer.body = req.body.body;
+		// of course, we need XSS protection
+		answer.save();
+		res.redirect('/question/'+answer.question_id);
+	});
+}
+
 
 module.exports = AnswerCtrl;

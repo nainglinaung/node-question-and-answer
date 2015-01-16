@@ -1,0 +1,18 @@
+//- index.jade
+extends ../layout
+block content
+  div(class="col-lg-8")
+    div(class="well")
+      form(class="form-horizontal" action="/answer/edit/"+answer._id method="post")
+        fieldset
+          legend
+            div(class="form-group")
+              label(for="question" class="col-lg-2 control-label") Question
+              div(class="col-lg-10")
+                div(class="form-control-wrapper")
+                  textarea(class="form-control empty" row="3" name="body")!= answer.body
+              div(class="col-lg-10 col-lg-offset-2")
+                a(class="btn btn-default" type="reset" href="/question/"+answer.question_id) Cancel
+                button(class="btn btn-primary" type="submit") Submit  
+
+  

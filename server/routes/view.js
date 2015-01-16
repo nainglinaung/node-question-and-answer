@@ -10,8 +10,6 @@ module.exports = (function() {
 	var router = express.Router();
 
 	router.get('/',function(req,res){
-		console.log(req.user);
-
 		Question.find({},{body:false},function (err, doc) {
   			if (err) return Logger.error(err);
   			res.render('partials/question',{title:'Hey', user:req.user, questions:doc});

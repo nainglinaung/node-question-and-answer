@@ -16,6 +16,9 @@ module.exports = (function() {
 
 	router.get('/down/:id',ensureAuthenticated,AnswerCtrl.getUpOrDown);
 
+	router.get('/edit/:id',ensureAuthenticated,AnswerCtrl.getEdit);
+
+	router.post('/edit/:id',ensureAuthenticated,AnswerCtrl.postEdit);
 
 	return router; 
 
