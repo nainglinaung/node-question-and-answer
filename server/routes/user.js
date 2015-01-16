@@ -24,6 +24,7 @@ module.exports = (function() {
 
 	router.get('/login',isLogin,UserCtrl.getLogin);
 
+	router.get('/logout',ensureAuthenticated,UserCtrl.getLogout);
 	
 
 	return router; 

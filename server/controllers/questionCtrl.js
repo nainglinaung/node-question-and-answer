@@ -9,13 +9,12 @@ mongoose.connect('mongodb://localhost/test');
 var QuestionCtrl = require('./adminCtrl');
 
 
-
-
 QuestionCtrl.getOne = function(req,res){
 	Question.findOne({_id:req.params.id},function (err, doc) {
-	(err) ? Logger.error(err) : doc.view++;			
 	
-	doc.save(function(err){
+		if (err) Logger.error(err);
+		doc.view++;			
+		doc.save(function(err){
 		if(err) Logger.error(err);			
 			Answer.find({question_id:req.params.id},function(err,answers){
 				doc.answers = answers;
@@ -23,6 +22,7 @@ QuestionCtrl.getOne = function(req,res){
 			});
 		});
 	});
+
 };
 
 QuestionCtrl.getCreate = function(req,res){
@@ -43,19 +43,6 @@ QuestionCtrl.postCreate = function(req,res){
 		Question.findById(q, function (err, doc) {
 			if (err) Logger.error(err);
 			res.redirect('/');			
-		});
-	});
-};
-
-QuestionCtrl.getUpOrDown = function(req,res){
-	Question.findOne({_id:req.params.id},function(err,doc){
-		if (err) Logger.error(err);
-		var path = req.url.split('/')[1];			
-		(path === 'up') ? doc.vote++ : doc.vote--;
-
-		doc.save(function(err){
-			if (err) Logger.error(err);
-			res.redirect('/question/'+req.params.id);
 		});
 	});
 };
