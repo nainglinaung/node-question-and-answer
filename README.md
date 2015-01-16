@@ -1,13 +1,10 @@
 # Node Question and Answer
 
-Stackoverflow replica with node.js
+Stackoverflow replica with Node.js.
 
-Firstly, you need to install dependencies by 
-
-> npm install
-
-then start it 
-
-> npm start 
-
-you can check it in localhost port 8080 
+# Installation
+1. Clone or download the repository
+2. Install npm modules: `npm install`
+3. Install bower dependencies `bower install`
+4. Start up the server: `npm start`
+5. Use `http://localhost:8080` to view in browser.
