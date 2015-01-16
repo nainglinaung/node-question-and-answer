@@ -6,7 +6,11 @@ Firstly, you need to install dependencies by
 
 > npm install
 
-then start it 
+then install bower dependencies by
+
+> bower install
+
+Finally, you can start it by
 
 > npm start 
 
