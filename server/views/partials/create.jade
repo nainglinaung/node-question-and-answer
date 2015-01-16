@@ -1,20 +1,25 @@
 //- index.jade
 extends ../layout
+
+unless question
+  question.body = ""
+  question.title = "" 
+   
 block content
   div(class="col-lg-8")
     div(class="well")
-      form(class="form-horizontal" action="create" method="post")
+      form(class="form-horizontal" action=question.method method="post")
         fieldset
           legend
             div(class="form-group")
               label(for="title" class="col-lg-2 control-label") title
               div(class="col-lg-10")
-                input(type="text" class="form-control" name="title" placeholder="title")
+                input(type="text" class="form-control" name="title" placeholder="title" value=question.title)
             div(class="form-group")
               label(for="question" class="col-lg-2 control-label") Question
               div(class="col-lg-10")
                 div(class="form-control-wrapper")
-                  textarea(class="form-control empty" row="3" name="body")
+                  textarea(class="form-control empty" row="3" name="body")!= question.body
               div(class="col-lg-10 col-lg-offset-2")
                 button(class="btn btn-default" type="reset") Cancel
                 button(class="btn btn-primary" type="submit") Submit  

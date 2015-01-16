@@ -25,8 +25,38 @@ QuestionCtrl.getOne = function(req,res){
 
 };
 
+QuestionCtrl.getEdit = function(req,res){
+	Question.findOne({_id:req.params.id},function(err,question){
+		if (err) Logger.error(err);
+		question.method = "/question/edit/"+question._id;
+		res.render('partials/create',{question:question});
+		// need to change create or edit 
+	});
+}
+
+QuestionCtrl.postEdit = function(req,res){
+	Question.findOne({_id:req.params.id},function(err,question){
+		
+		if (err) Logger.error(err);
+
+		var body = req.body;
+
+		question.body = body.body;
+		question.title = body.title;
+		
+		// of course, we need XSS protection
+		question.save();
+
+		res.redirect('/question/'+question._id);
+	});
+}
+
+
 QuestionCtrl.getCreate = function(req,res){
-	res.render('partials/create',{title:'create'});
+
+	question.method = "create";
+
+	res.render('partials/create',{title:'create', question:question});
 };
 
 QuestionCtrl.postCreate = function(req,res){

@@ -33,10 +33,8 @@ AnswerCtrl.getEdit = function(req,res){
 };
 
 AnswerCtrl.postEdit = function(req,res){
-
 	Answer.findOne({_id:req.params.id},function(err,answer){
 		if (err) Logger.error(err);
-
 		answer.body = req.body.body;
 		// of course, we need XSS protection
 		answer.save();
