@@ -1,13 +1,10 @@
+var cookieParser   = require('cookie-parser');
+var bodyParser     = require('body-parser');
+var methodOverride = require('method-override');
+var session        = require('express-session');
+var flash          = require('connect-flash');
+var passport       = require('passport');
 
-
-
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var methodOverride=  require('method-override');
-var session = require('express-session');
-var flash = require('connect-flash');
-
-var passport = require('passport');
 require('./passport')(passport);
 
 

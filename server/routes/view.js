@@ -1,6 +1,6 @@
-var express = require('express');
+var express  = require('express');
 var mongoose = require('mongoose');
-var Logger = require('winston');
+var Logger   = require('winston');
 var Question = require('../models/question');
 
 module.exports = (function() {

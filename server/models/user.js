@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose      = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt        = require('bcrypt-nodejs');
+
+var Schema = mongoose.Schema;
 
 
 var schema = new Schema({

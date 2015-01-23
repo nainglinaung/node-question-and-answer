@@ -1,5 +1,5 @@
-var Logger = require('winston');
-var express = require('express');
+var Logger   = require('winston');
+var express  = require('express');
 var UserCtrl = require('../controllers/userCtrl');
 
 

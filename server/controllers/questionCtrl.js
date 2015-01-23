@@ -1,13 +1,13 @@
-var Question = require('../models/question');
-var Answer  = require('../models/answer');
-var Use  =  require('../models/user');
-var faker = require('faker');
-var util = require('util');
-var Logger = require('winston');
-
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var Question     = require('../models/question');
+var Answer       = require('../models/answer');
+var Use          = require('../models/user');
+var faker        = require('faker');
+var util         = require('util');
+var Logger       = require('winston');
 var QuestionCtrl = require('./adminCtrl');
+var mongoose     = require('mongoose');
+
+mongoose.connect('mongodb://localhost/test');
 
 
 QuestionCtrl.getOne = function(req,res){
@@ -18,7 +18,7 @@ QuestionCtrl.getOne = function(req,res){
 		if(err) Logger.error(err);			
 			Answer.find({question_id:req.params.id},function(err,answers){				
 			    answers = (answers.length > 0) ? answers : null;    
-				res.render('partials/single', { title: 'ads', doc:doc,user:req.user,answers:answers});
+				res.render('partials/single', { title: 'ads', title:doc.title, doc:doc,user:req.user,answers:answers});
 			});
 		});
 	});
@@ -51,7 +51,6 @@ QuestionCtrl.postEdit = function(req,res){
 
 QuestionCtrl.getCreate = function(req,res){
 	var question =  {method:"create"};
-	
 	res.render('partials/create',{title:'create', question:question});
 };
 

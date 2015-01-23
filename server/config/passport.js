@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User          = require('../models/user');
 var LocalStrategy = require('passport-local').Strategy;
 
 

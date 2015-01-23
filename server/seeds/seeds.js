@@ -1,6 +1,6 @@
-var Question = require('../models/question');
-var faker = require('faker');
-var logger = require('winston');
+var Question   = require('../models/question');
+var faker      = require('faker');
+var logger     = require('winston');
 var prettyjson = require('prettyjson');
 
 var q = new Question({

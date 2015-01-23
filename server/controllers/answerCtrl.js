@@ -1,6 +1,6 @@
-var Answer  = require('../models/answer');
-var faker = require('faker');
-var Logger = require('winston');
+var Answer     = require('../models/answer');
+var faker      = require('faker');
+var Logger     = require('winston');
 var AnswerCtrl = require('./adminCtrl');
 
 
