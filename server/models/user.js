@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 
 var schema = new Schema({
-	user: String,
+	name: String,
 	local: {
 		email:String,
 		password:String
@@ -30,7 +30,9 @@ var schema = new Schema({
 	},
 	profile: String,
 	date: { type: Date, default: Date.now },
-	point: { type:Number, default:0}
+	point: { type:Number, default:0},
+	question_count: { type:Number, default:0},
+	answer_count: {type:Number,default:0}
 });
 
 schema.methods.generateHash = function(password){

@@ -1,31 +1,31 @@
+if answers !== null 
+  h4!= "Answer"
 
-h4!= "Answer"
-
-each answer in doc.answers
-  div(class="well")
-    div
-      div(class="row")
-        div(class="col-lg-1")
-          +vote(answer,"answer")
-        div(class="body col-lg-11")
-          p!=answer.body
+  each answer in answers
+    div(class="well")
+      div
         div(class="row")
-          span
-            a(href='/answer/share/'+answer._id)!= "share"
-          span
-            a(href="/answer/edit/"+answer._id)!= "edit"      
+          div(class="col-lg-1")
+            +vote(answer,"answer")
+          div(class="body col-lg-11")
+            p!=answer.body
+          div(class="row")
+            span
+              a(href='/answer/share/'+answer._id)!= "share"
+            span
+              a(href="/answer/edit/"+answer._id)!= "edit"      
       
 
     +info(answer,"&nbsp; answered by &nbsp;")
-    
-div(class="well")
-   form(class="form-horizontal" action='/answer/'+doc._id method="post")
-        fieldset
-          legend
-            div(class="form-group")
-              div(class="col-lg-12")
-                div(class="form-control-wrapper")
-                  textarea(class="form-control full-answer" row="3"  name="body")
-              div(class="col-lg-12")
-                button(class="btn btn-primary" type="submit") Submit  
+if user    
+  div(class="well")
+     form(class="form-horizontal" action='/answer/'+doc._id method="post")
+          fieldset
+            legend
+              div(class="form-group")
+                div(class="col-lg-12")
+                  div(class="form-control-wrapper")
+                    textarea(class="form-control full-answer" row="3"  name="body")
+                div(class="col-lg-12")
+                  button(class="btn btn-primary" type="submit") Submit  
 

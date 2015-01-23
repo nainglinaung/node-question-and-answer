@@ -1,5 +1,6 @@
 var Question = require('../models/question');
 var Answer  = require('../models/answer');
+var Use  =  require('../models/user');
 var faker = require('faker');
 var util = require('util');
 var Logger = require('winston');
@@ -10,19 +11,17 @@ var QuestionCtrl = require('./adminCtrl');
 
 
 QuestionCtrl.getOne = function(req,res){
-	Question.findOne({_id:req.params.id},function (err, doc) {
-	
+	Question.findOne({_id:req.params.id},function (err, doc) {	
 		if (err) Logger.error(err);
 		doc.view++;			
 		doc.save(function(err){
 		if(err) Logger.error(err);			
-			Answer.find({question_id:req.params.id},function(err,answers){
-				doc.answers = answers;
-				res.render('partials/single', { title: 'ads', doc:doc});
+			Answer.find({question_id:req.params.id},function(err,answers){				
+			    answers = (answers.length > 0) ? answers : null;    
+				res.render('partials/single', { title: 'ads', doc:doc,user:req.user,answers:answers});
 			});
 		});
 	});
-
 };
 
 QuestionCtrl.getEdit = function(req,res){
@@ -35,10 +34,8 @@ QuestionCtrl.getEdit = function(req,res){
 }
 
 QuestionCtrl.postEdit = function(req,res){
-	Question.findOne({_id:req.params.id},function(err,question){
-		
+	Question.findOne({_id:req.params.id},function(err,question){		
 		if (err) Logger.error(err);
-
 		var body = req.body;
 
 		question.body = body.body;
@@ -53,30 +50,30 @@ QuestionCtrl.postEdit = function(req,res){
 
 
 QuestionCtrl.getCreate = function(req,res){
-
-	question.method = "create";
-
+	var question =  {method:"create"};
+	
 	res.render('partials/create',{title:'create', question:question});
 };
 
 QuestionCtrl.postCreate = function(req,res){
 	var body = req.body; 
+		
 	var q = new Question({
 	  title: body.title,
-	  user: faker.name.findName(),
-	  body: body.body
+	   body: body.body,
+	   user: req.user.name,
+	   user_id : req.user._id
 	});
 
 	q.save(function(err) {
-
 		if (err) Logger.error(err);
 		Question.findById(q, function (err, doc) {
 			if (err) Logger.error(err);
 			res.redirect('/');			
 		});
 	});
+	
 };
 
 
 module.exports = QuestionCtrl;
-

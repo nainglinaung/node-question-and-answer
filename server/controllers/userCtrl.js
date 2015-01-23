@@ -1,8 +1,7 @@
-var user  = require('../models/user');
-var faker = require('faker');
+var user     = require('../models/user');
+var faker    = require('faker');
 var UserCtrl = require('./adminCtrl');
-var Logger = require('winston');
-
+var Logger   = require('winston');
 var passport = require('passport');
 
 
@@ -25,6 +24,8 @@ UserCtrl.postLogin = passport.authenticate('local-login',{
 	failureRedirect:'/user/login',
 	failureFlash:true
 });
+
+
 
 UserCtrl.getProfile = function(req,res){
 	res.json({user:req.user});

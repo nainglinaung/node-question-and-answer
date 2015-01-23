@@ -6,10 +6,13 @@ var AnswerCtrl = require('./adminCtrl');
 
 AnswerCtrl.postCreate = function(req,res){
 
+	console.log(req.user);	
+	
 	var ans = new Answer({
-	  user: faker.name.findName(),
+	  user: req.user.name,
 	  body: req.body.body,
-	  question_id: req.params.id,
+	  user_id: req.user._id, 
+	  question_id: req.params.id
 	});
 
 	ans.save(function (err) {

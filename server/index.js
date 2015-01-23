@@ -6,6 +6,7 @@ var app = express();
 app.set('view engine','jade');
 app.set('views', __dirname + '/views');
 
+//var database = require('./config/database')();
 
 var db = require('./config')(app,express);
 var base_url = path.normalize(__dirname+'/..');

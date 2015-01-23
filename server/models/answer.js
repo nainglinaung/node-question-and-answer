@@ -6,6 +6,7 @@ var schema = new Schema({
 	user: String,
 	question_id:Schema.Types.ObjectId,
 	body: String,
+	user_id:Schema.Types.ObjectId,
 	date: { type: Date, default: Date.now },
 	vote: { type:Number, default:0}
 });

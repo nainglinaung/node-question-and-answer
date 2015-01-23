@@ -8,6 +8,7 @@ var schema = new Schema({
 	user: String,
 	body: String,
 	answer_count: {type:Number, default:0},
+	user_id: Schema.Types.ObjectId,
 	date: { type: Date, default: Date.now },
 	view: {type: Number, default: 0},
 	vote: {type:Number, default:0}
