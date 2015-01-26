@@ -26,6 +26,8 @@ module.exports = (function() {
 
 	router.get('/:id',QuestionCtrl.getOne);
 
+	router.get('/delete/:id',ensureAuthenticated,QuestionCtrl.getDelete);
+
 
 	return router; 
 

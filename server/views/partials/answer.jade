@@ -13,7 +13,9 @@ if answers !== null
             span
               a(href='/answer/share/'+answer._id)!= "share"
             span
-              a(href="/answer/edit/"+answer._id)!= "edit"      
+              a(href="/answer/edit/"+answer._id)!= "edit" 
+            span
+              a(href="/answer/delete/"+answer._id)!= "delete"     
       
 
     +info(answer,"&nbsp; answered by &nbsp;")

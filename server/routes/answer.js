@@ -19,6 +19,9 @@ module.exports = (function() {
 
 	router.post('/edit/:id',ensureAuthenticated,AnswerCtrl.postEdit);
 
+	router.get('/delete/:id',ensureAuthenticated,AnswerCtrl.getDelete);
+
+
 	return router; 
 
 })();

@@ -48,6 +48,16 @@ QuestionCtrl.postEdit = function(req,res){
 	});
 }
 
+QuestionCtrl.getDelete = function(req,res){
+	Question.findOneAndRemove({_id:req.params.id}, function(err,data){
+		if (err) Logger.error(err);
+		Answer.remove({question_id:req.params.id},function(err){
+			console.log(data);
+			res.redirect('/');	
+		});
+	});
+}
+
 
 QuestionCtrl.getCreate = function(req,res){
 	var question =  {method:"create"};

@@ -45,5 +45,12 @@ AnswerCtrl.postEdit = function(req,res){
 	});
 }
 
+AnswerCtrl.getDelete = function(req,res){
+	Answer.findOneAndRemove({_id:req.params.id}, function(err,answer){
+		if (err) Logger.error(err);
+		res.redirect('/question/'+answer.question_id)
+
+	});
+}
 
 module.exports = AnswerCtrl;

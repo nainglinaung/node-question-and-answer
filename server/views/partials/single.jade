@@ -32,7 +32,9 @@ block content
           span
             a(href='/question/share/'+doc._id)!= "share"
           span
-            a(href="/question/edit/"+doc._id)!= "edit"      
+            a(href="/question/edit/"+doc._id)!= "edit" 
+          span
+            a(href="/question/delete"+doc._id)!= "delete"       
       
 
     include answer.jade
