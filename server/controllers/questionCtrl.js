@@ -78,7 +78,7 @@ QuestionCtrl.postCreate = function(req,res){
 		if (err) Logger.error(err);
 		Question.findById(q, function (err, doc) {
 			if (err) Logger.error(err);
-			res.redirect('/');			
+			res.redirect('/question/'+q._id);			
 		});
 	});
 	
