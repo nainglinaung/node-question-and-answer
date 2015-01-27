@@ -4,17 +4,29 @@ Stackoverflow replica with node.js
 
 Firstly, you need to install dependencies by 
 
+## Prerequisites
+
 > npm install
 
 then install bower dependencies by
 
 > bower install
 
+
+## Running 
+
 Finally, you can start it by
 
 > npm start 
 
 you can check it in localhost port 8080 
+
+## Testing 
+
+You can run tests by 
+
+> npm test
+
 
 ## Register
 
